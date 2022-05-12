@@ -1,38 +1,24 @@
 import mugs from './mugs.js';
 
 // Mugs
-const mugsBlock = document.querySelector('.mugs__blocks');
-const moreProductsBlock = document.querySelector('.more-products__blocks');
+const blocks = document.querySelectorAll('[sale]');
 
-const featuredMugs = mugs.filter(item => item.featured);
+blocks.forEach((block, i) => {
+    const img = block.querySelector('img'),
+        priceBlock = block.querySelector('.price'),
+        newPrice = document.createElement('div');
 
-function showMugs(mugs, block, className) {
-    mugs.forEach(({ img, name, price, newPrice, sale }) => {
+    priceBlock.classList.add('price__sale');
+    newPrice.classList.add('sale');
 
-        const element = document.createElement('div');
-        element.classList.add(`${className}__block`, 'block', 'swiper-slide');
+    if (priceBlock.getAttribute('data-sale') == i) {
+        newPrice.textContent = mugs[i][i];
+    };
 
-        element.innerHTML = `
-            <div class="${className}__img">
-                ${sale ? `<span class="sale__label">On Sale.</span>` : ''}
-                <img src=${img} alt=${name}>
-                <a href="#" target='_blank' class="${className}__button button">Explore Mug</a>
-            </div>
-            <div class="${className}__name name">${name}</div>
-            
-            ${sale ?
-                `<div class="${className}__price price">
-                    <span class="sale">${newPrice}</span>
-                    <span class="price__sale">${price}</span>
-                </div>` :
-                `<div class="${className}__price price">${price}</div>`}
-    `
-        block.append(element);
-    })
-};
+    priceBlock.prepend(newPrice);
+    img.insertAdjacentHTML('beforebegin', '<span class="sale__label">On Sale.</span>');
 
-showMugs(featuredMugs, mugsBlock, 'mugs');
-showMugs(mugs, moreProductsBlock, 'more-products');
+});
 
 // Slide
 const sliderSwiper = document.querySelector('.mugs');

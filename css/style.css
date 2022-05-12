@@ -68,10 +68,13 @@ a {
     margin-top: 7px;
     font-size: 16px;
     line-height: 28px;
+}
+
+.price span {
     color: var(--second);
 }
 
-.price__sale {
+.price__sale span {
     text-decoration-line: line-through;
     color: var(--price-sale);
 }
@@ -83,9 +86,10 @@ a {
 }
 
 .sale {
+    display: inline-block;
     margin-right: 6px;
     color: var(--red);
-    font-size: 20px
+    font-size: 20px;
 }
 
 .sale__label {
